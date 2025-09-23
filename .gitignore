@@ -28,3 +28,9 @@ replay_pid*
 
 #IDE
 .idea/
+.iml/
+
+local.properties
+
+#El cache local de Gradle
+.gradle/
