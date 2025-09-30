@@ -13,6 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import cl.munozmoranicolasprofesor.pasteleriapp.ui.theme.PasteleriappTheme
 import cl.munozmoranicolasprofesor.pasteleriapp.ui.HomeScreen
+import cl.munozmoranicolasprofesor.pasteleriapp.ui.screens.HomeScreenMain
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +27,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(innerPadding)
                     )
                 }*/
-                HomeScreen()
+                HomeScreenMain()
             }
         }
     }
