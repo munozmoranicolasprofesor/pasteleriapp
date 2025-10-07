@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -15,6 +16,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import cl.munozmoranicolasprofesor.pasteleriapp.navigation.AppNavigation
 import cl.munozmoranicolasprofesor.pasteleriapp.navigation.NavigationEvent
 import cl.munozmoranicolasprofesor.pasteleriapp.navigation.Screen
 import cl.munozmoranicolasprofesor.pasteleriapp.ui.theme.PasteleriappTheme
@@ -31,7 +33,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PasteleriappTheme {
-                val viewModel: MainViewModel = viewModel()
+                /*val viewModel: MainViewModel = viewModel()
                 val navController = rememberNavController()
 
                 LaunchedEffect(key1 = Unit) {
@@ -52,11 +54,15 @@ class MainActivity : ComponentActivity() {
                             is NavigationEvent.NavigateUp -> navController.navigateUp()
                         }
                     }
-                }
+                }*/
                 Scaffold(
                     modifier = Modifier.fillMaxSize()
                 ) { innerPadding ->
-                    NavHost(
+                    Box(Modifier.padding(innerPadding)){
+                        AppNavigation()
+                    }
+
+                    /*NavHost(
                         navController = navController,
                         startDestination = Screen.Login.route,
                         modifier = Modifier.padding(innerPadding)
@@ -73,7 +79,7 @@ class MainActivity : ComponentActivity() {
                         composable(route = Screen.Setting.route){
                             SettingScreen(navController = navController, viewModel = viewModel)
                         }
-                    }
+                    }*/
                 }
             }
         }
