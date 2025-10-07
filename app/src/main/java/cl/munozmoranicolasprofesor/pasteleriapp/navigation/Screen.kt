@@ -2,6 +2,8 @@ package cl.munozmoranicolasprofesor.pasteleriapp.navigation
 
 sealed class Screen(val route:String) {
 
+    data object Login : Screen("login_page")
+
     data object Home : Screen("home_page")
 
     data object Profile : Screen("profile_page")

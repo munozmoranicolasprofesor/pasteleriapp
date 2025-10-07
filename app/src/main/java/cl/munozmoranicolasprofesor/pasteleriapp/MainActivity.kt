@@ -19,6 +19,7 @@ import cl.munozmoranicolasprofesor.pasteleriapp.navigation.NavigationEvent
 import cl.munozmoranicolasprofesor.pasteleriapp.navigation.Screen
 import cl.munozmoranicolasprofesor.pasteleriapp.ui.theme.PasteleriappTheme
 import cl.munozmoranicolasprofesor.pasteleriapp.ui.HomeScreen
+import cl.munozmoranicolasprofesor.pasteleriapp.ui.screens.LoginScreen
 import cl.munozmoranicolasprofesor.pasteleriapp.ui.screens.ProfileScreen
 import cl.munozmoranicolasprofesor.pasteleriapp.ui.screens.SettingScreen
 import cl.munozmoranicolasprofesor.pasteleriapp.viewmodels.MainViewModel
@@ -57,9 +58,12 @@ class MainActivity : ComponentActivity() {
                 ) { innerPadding ->
                     NavHost(
                         navController = navController,
-                        startDestination = Screen.Home.route,
+                        startDestination = Screen.Login.route,
                         modifier = Modifier.padding(innerPadding)
                     ){
+                        composable(route = Screen.Login.route){
+                            LoginScreen(navController = navController, viewModel = viewModel)
+                        }
                         composable(route = Screen.Home.route){
                             HomeScreen(navController = navController, viewModel = viewModel)
                         }
