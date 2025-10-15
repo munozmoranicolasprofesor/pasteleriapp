@@ -23,6 +23,7 @@ import cl.munozmoranicolasprofesor.pasteleriapp.ui.theme.PasteleriappTheme
 import cl.munozmoranicolasprofesor.pasteleriapp.ui.HomeScreen
 import cl.munozmoranicolasprofesor.pasteleriapp.ui.screens.ProfileScreen
 import cl.munozmoranicolasprofesor.pasteleriapp.ui.screens.SettingScreen
+import cl.munozmoranicolasprofesor.pasteleriapp.ui.screens.guia12.PantallaPrincipal
 import cl.munozmoranicolasprofesor.pasteleriapp.viewmodels.MainViewModel
 import kotlinx.coroutines.flow.collectLatest
 
@@ -32,6 +33,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PasteleriappTheme {
+                //Guia 12
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
+                    PantallaPrincipal(modifier = Modifier.padding(innerPadding))
+                }
                 /*val viewModel: MainViewModel = viewModel()
                 val navController = rememberNavController()
 
@@ -54,7 +61,7 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                 }*/
-                Scaffold(
+                /*Scaffold(
                     modifier = Modifier.fillMaxSize()
                 ) { innerPadding ->
                     Box(Modifier.padding(innerPadding)){
@@ -76,7 +83,7 @@ class MainActivity : ComponentActivity() {
                             SettingScreen(navController = navController, viewModel = viewModel)
                         }
                     }*/
-                }
+                }*/
             }
         }
     }
