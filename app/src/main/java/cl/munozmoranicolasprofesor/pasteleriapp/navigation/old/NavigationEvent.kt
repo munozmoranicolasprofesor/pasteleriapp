@@ -1,4 +1,6 @@
-package cl.munozmoranicolasprofesor.pasteleriapp.navigation
+package cl.munozmoranicolasprofesor.pasteleriapp.navigation.old
+
+import cl.munozmoranicolasprofesor.pasteleriapp.navigation.old.Screen
 
 sealed class NavigationEvent {
 

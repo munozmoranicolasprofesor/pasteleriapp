@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -22,7 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import cl.munozmoranicolasprofesor.pasteleriapp.navigation.Screen
+import cl.munozmoranicolasprofesor.pasteleriapp.navigation.old.Screen
 import cl.munozmoranicolasprofesor.pasteleriapp.viewmodels.MainViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -31,7 +32,7 @@ fun ProfileScreen(
     navController: NavController,
     viewModel: MainViewModel = viewModel()
 ){
-    val items = listOf(Screen.Home, Screen.Profile)
+    val items = listOf("home", "perfil","registro")
     var selectedItem by remember { mutableStateOf(value = 1) }
 
     Scaffold(
@@ -42,13 +43,13 @@ fun ProfileScreen(
                         selected = selectedItem == index,
                         onClick = {
                             selectedItem = index
-                            viewModel.navigateTo(screen)
+                            navController.navigate(screen)
                         },
-                        label = { Text(screen.route) },
+                        label = { Text(screen) },
                         icon = {
                             Icon(
-                                imageVector = if (screen == Screen.Home) Icons.Default.Home else Icons.Default.Person,
-                                contentDescription = screen.route
+                                imageVector = if (screen == "home") Icons.Default.Home else if (screen == "perfil") Icons.Default.Person else Icons.Default.Build,
+                                contentDescription = screen
                             )
                         }
                     )

@@ -8,59 +8,34 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import cl.munozmoranicolasprofesor.pasteleriapp.R
-import cl.munozmoranicolasprofesor.pasteleriapp.navigation.Screen
-import cl.munozmoranicolasprofesor.pasteleriapp.viewmodels.MainViewModel
-import kotlinx.coroutines.launch
+import cl.munozmoranicolasprofesor.pasteleriapp.viewmodels.LoginViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
     navController: NavController,
-    viewModel: MainViewModel = viewModel()
+    viewModelLogin: LoginViewModel
+) {
+    val estado by viewModelLogin.estado.collectAsState()
 
-){
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    val scope = rememberCoroutineScope()
-
-    var username by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var passwordVisible by remember { mutableStateOf(false) }
-
-    ModalNavigationDrawer(
-        drawerState = drawerState,
-        drawerContent = {
-            ModalDrawerSheet {
-                Text("Menú", modifier = Modifier.padding(16.dp))
-                NavigationDrawerItem(
-                    label = {Text("Ir a Perfil")},
-                    selected = false,
-                    onClick = {
-                        scope.launch { drawerState.close() }
-                        viewModel.navigateTo(Screen.Profile)
-                    }
-                )
-            }
-        }
+    Column (
+        Modifier.fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         Scaffold(
             topBar = {
@@ -90,25 +65,44 @@ fun LoginScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 OutlinedTextField(
-                    value = username,
-                    onValueChange = { username = it },
+                    value = estado.usuario,
+                    onValueChange = viewModelLogin::onUsuarioChange,
                     label = { Text("Usuario") },
-                    singleLine = true,
-                    placeholder = { Text("Usuario") },
-                    modifier = Modifier.fillMaxWidth(0.8f)
+                    isError = estado.errores.usuario != null,
+                    supportingText = {
+                        estado.errores.usuario?.let {
+                            Text(it, color = MaterialTheme.colorScheme.error)
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth()
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                TextField(
-                    value = "Contraseña",
-                    onValueChange = {},
-                    enabled = true,
-                    readOnly = false,
+                OutlinedTextField(
+                    value = estado.clave,
+                    onValueChange = viewModelLogin::onClaveChange,
+                    label = { Text("Contraseña") },
+                    visualTransformation = PasswordVisualTransformation(),
+                    isError = estado.errores.clave != null,
+                    supportingText = {
+                        estado.errores.clave?.let {
+                            Text(it, color = MaterialTheme.colorScheme.error)
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth()
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
-                Button(onClick = { viewModel.navigateTo(Screen.Home) }) {
+
+                Button(
+                    onClick = {
+                        if (viewModelLogin.validar()){
+                            navController.navigate("home")
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
                     Text("Iniciar Sesion")
                 }
             }
@@ -119,7 +113,7 @@ fun LoginScreen(
 @Preview(name = "LoginScreen", widthDp = 360, heightDp = 800)
 @Composable
 fun PreviewLoginScreen(){
-    val viewModel: MainViewModel = viewModel()
+    val viewModel = LoginViewModel()
     val navController = rememberNavController()
-    LoginScreen(navController = navController, viewModel = viewModel)
+    LoginScreen(navController = navController, viewModel)
 }

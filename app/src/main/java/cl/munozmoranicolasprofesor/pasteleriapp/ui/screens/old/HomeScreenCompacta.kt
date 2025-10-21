@@ -1,4 +1,4 @@
-package cl.munozmoranicolasprofesor.pasteleriapp.ui.screens
+package cl.munozmoranicolasprofesor.pasteleriapp.ui.screens.old
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -22,10 +22,10 @@ import cl.munozmoranicolasprofesor.pasteleriapp.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreemExtendida(){
+fun HomeScreemCompacta(){
     Scaffold (
         topBar = {
-            TopAppBar(title = { Text(text="Mi App Kotlin Extendida") })
+            TopAppBar(title = { Text(text="Mi App Kotlin") })
         }
     ){
         innerPadding ->
@@ -36,7 +36,7 @@ fun HomeScreemExtendida(){
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             Text(
-                text = "¡Bienvenido Extendida!",
+                text = "¡Bienvenido Compacta!",
                 color = MaterialTheme.colorScheme.primary,
                 style = MaterialTheme.typography.titleLarge
             )
@@ -46,7 +46,7 @@ fun HomeScreemExtendida(){
 
             Image(
                 painter = painterResource(id= R.drawable.logo),
-                contentDescription = "Logo App Extendida",
+                contentDescription = "Logo App Compacta",
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(150.dp),

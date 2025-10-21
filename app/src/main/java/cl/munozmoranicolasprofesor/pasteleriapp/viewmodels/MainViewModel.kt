@@ -1,8 +1,8 @@
 package cl.munozmoranicolasprofesor.pasteleriapp.viewmodels
 
 import androidx.lifecycle.ViewModel
-import cl.munozmoranicolasprofesor.pasteleriapp.navigation.NavigationEvent
-import cl.munozmoranicolasprofesor.pasteleriapp.navigation.Screen
+import cl.munozmoranicolasprofesor.pasteleriapp.navigation.old.NavigationEvent
+import cl.munozmoranicolasprofesor.pasteleriapp.navigation.old.Screen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow

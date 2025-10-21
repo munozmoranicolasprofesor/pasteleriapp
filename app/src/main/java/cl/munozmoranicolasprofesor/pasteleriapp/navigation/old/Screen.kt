@@ -1,4 +1,4 @@
-package cl.munozmoranicolasprofesor.pasteleriapp.navigation
+package cl.munozmoranicolasprofesor.pasteleriapp.navigation.old
 
 sealed class Screen(val route:String) {
 

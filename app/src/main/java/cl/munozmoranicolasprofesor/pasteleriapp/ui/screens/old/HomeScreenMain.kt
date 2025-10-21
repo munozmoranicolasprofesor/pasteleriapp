@@ -1,4 +1,4 @@
-package cl.munozmoranicolasprofesor.pasteleriapp.ui.screens
+package cl.munozmoranicolasprofesor.pasteleriapp.ui.screens.old
 
 import androidx.compose.runtime.Composable
 import cl.munozmoranicolasprofesor.pasteleriapp.ui.utils.obtenerWindowSizeClass
